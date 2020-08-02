@@ -33,3 +33,7 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    app.service.weather:
+        alias: App\Service\Weather\WeatherService
+        public: true

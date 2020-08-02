@@ -1,0 +1,20 @@
+<h2 class="ui center aligned huge header">{{ 'app.ui.weather_products'|trans }}</h2>
+<div class="ui hidden divider"></div>
+
+{% if app.session.has('WEATHER_SERVICE_LOCATION_CODE') %}
+    <div {{ sylius_test_html_attribute('latest-products') }}>
+        {{ render(url('app_partial_product_index_weather', {'count': 3, 'template': '@SyliusShop/Homepage/_list.html.twig'})) }}
+    </div>
+    <div>
+        {{ 'app.ui.showing_products_for' }} {{ app.session.get('WEATHER_SERVICE_LOCATION_CODE') }}<br>
+        {{ 'app.ui.weather_data_from' }} <a href="https://www.meteo.lt">LHMT</a>
+    </div>
+    <div class="ui hidden divider"></div>
+{% else %}
+    {# TODO: implement Symfony forms #}
+    <form method="POST" action="{{ path('app_weather_location') }}">
+        <label for="locationCode">City:</label>
+        <input id="locationCode" type="text" name="locationCode">
+        <input type="submit">
+    </form>
+{% endif %}

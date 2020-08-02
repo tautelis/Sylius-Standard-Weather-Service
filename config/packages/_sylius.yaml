@@ -143,6 +143,7 @@ sylius_product:
         product:
             classes:
                 model: App\Entity\Product\Product
+                repository: App\Doctrine\ORM\ProductRepository
             translation:
                 classes:
                     model: App\Entity\Product\ProductTranslation
@@ -228,6 +229,15 @@ sylius_taxonomy:
             translation:
                 classes:
                     model: App\Entity\Taxonomy\TaxonTranslation
+
+sylius_ui:
+    events:
+        sylius.shop.homepage:
+            blocks:
+                weather_products:
+                    template: "Homepage/_weatherProducts.html.twig"
+                    priority: 55
+
 sylius_user:
     resources:
         admin:
