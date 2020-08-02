@@ -1,0 +1,20 @@
+app_weather_location:
+    path: /weather/location
+    methods: [POST]
+    defaults:
+        _controller: 'App\Controller\WeatherController:locationAction'
+
+app_partial_product_index_weather:
+    path: /weather/products/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findByWeatherAndChannelChannel
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - "expr:service('app.service.weather').getWeatherCondition()"
+                    - '!!int $count'
